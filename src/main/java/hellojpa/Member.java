@@ -3,10 +3,12 @@ package hellojpa;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-public class Member {
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -16,19 +18,13 @@ public class Member {
     @Column(name = "USERNAME")
     private String username;
 
-//    @Column(name = "TEAM_ID")
-//    private Long teamId;
-
     @ManyToOne
-    @JoinColumn(name = "TEAM_ID")
+    @JoinColumn(name ="TEAM_ID", insertable = false, updatable = false)
     private Team team;
+
 
     public Long getId() {
         return id;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
     }
 
     public void setId(Long id) {
@@ -47,12 +43,9 @@ public class Member {
         return team;
     }
 
-    @Override
-    public String toString() {
-        return "Member{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", team=" + team +
-                '}';
+    public void setTeam(Team team) {
+        this.team = team;
     }
+
+
 }
